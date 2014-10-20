@@ -1,0 +1,469 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% file: ics-2015-paper-sample.tex
+% for authors of proceedings accompanying ICS 2015
+% author: Mirko Janc
+% last update:  May 8, 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{ics-2015}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1} %
+
+\YEAR{2015}%
+\FIRSTPAGE{000}%
+\LASTPAGE{000}%
+\DOI{http://dx.doi.org/10.1287/ics.2015.XXXX}
+
+%\CHAPTERNO{}%   Not in use
+
+\TITLE{Papers Accompanying the 14th ICS Conference---Style Instructions}
+
+%%\SUBTITLE{Subtitle Should Generally Be Avoided}% comment out if not necessary
+
+\AUBLOCK{% Numbers next to the \AUTHOR are just for reference---they do not appear
+%
+\AUTHOR{Mirko Janc}
+\AFF{INFORMS, 5521 Research Park Drive, Catonsville, Maryland 21228, USA,
+\EMAIL{mirko.janc@informs.org}}
+%
+\AUTHOR{Second User, Third Author}
+\AFF{Computer Science Department, University of Anystate, Someville, Anystate 02005, USA,
+\textbraceleft\EMAIL{second.user@anystate.edu}, \EMAIL{third.author@anystate.edu}\textbraceright}
+%
+}
+
+\RUNNINGHEAD{Janc, User, and Author: ICS-2015 Style Instructions}
+
+\ABSTRACT{The text here should be your abstract. If at all possible, avoid having more than
+one paragraph. Formulas are not forbidden but should be avoided because the abstract will be
+also ``out there'' in Internet environments that are not ``math-friendly.'' References from
+the abstract should also be avoided. If a reference is absolutely necessary, it should be
+shown in full. Under the abstract are the keywords. They should be listed in their natural
+case, as a semicolon-separated list. The text that follows gives additional explanations of
+how to use the style for producing papers for the proceedings, to be published 
+open access.}
+
+\KEYWORDS{ICS 2015; operations research publications; paper
+preprints; LaTeX templates; LaTeX styles}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}%1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We give a brief overview of some elements that appear in the {\ICS} style. The style is based
+on standard fonts that come with TeX for free.
+%The usual LaTeX font loading process is somewhat altered to reduce the number of PostScript Type1 fonts used.
+It is assumed that you run LaTeX2e (not the obsolete LaTeX 2.09).
+Your system should use PostScript Type1 Computer Modern fonts (that are truly scalable!),
+not the bitmapped fonts.
+Type1 fonts come with any of currently available popular TeX systems---free systems (MiKTeX, teTeX, OzTeX, etc.),
+or commercial TeX implementations (PCTeX, YYTeX, Textures, etc.).
+
+For versatility of handling mathematics, \verb+amsmath+ and
+\verb+amssymb+ packages are preloaded by the style---you do not have to
+declare them via \verb+\usepackage+. For inclusion of graphics,
+\verb+graphicx+ package is also automatically preloaded by the style.
+Because of the everywhere present Web addresses, package \verb+url+ is also preloaded.
+For LaTeX related questions that are not a part of ``how to use this style?'',
+please refer to any of LaTeX textbooks or references.
+
+One often neglected element of style is the treatment of upper- and lowercase in a sentence
+or a fragment. Our style does not allow all uppercase titles/heads. The other two
+possibilities and their usage in the {\ICS} style are shown in Table~\ref{st-style}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}
+\TABLE
+{\textit{Title style} vs.\ \textit{sentence style}: overview of the usage.\label{st-style}}
+{\begin{tabular*}{\hsize}{@{\extracolsep{\fill}}p{1.2in}p{1.5in}p{2.3in}@{}}
+\hline
+\up\down Case style& \mc{Example}& \mc{Usage}\\
+\hline
+\RG\up Title style %%%\newline (aka CLC = caps and lowercase)
+& \RG Example Bibliography & \RG Chapter title; section, subsection,
+subsubsection, paragraph, and subparagraph titles; running heads;
+heads of all theorem-like environments; book, journal, dissertation, etc. titles in references\\[4pt]
+\RG Sentence style %%%(aka ICLC = initial cap and (then) lowercase)
+& \RG Example bibliography & \RG Figure and table captions; figure and
+table notes; table column heads; words and sentence fragments as table body entries;
+article titles in references\down\\
+\hline
+\end{tabular*}}
+{}
+\end{table}
+
+\subsection{Section Numbering}% 1.1
+
+Sections are numbered in the usual
+way. Generally, the style allows for numbering down to level 5, which is the
+standard LaTeX term for the sequence of headings \verb+\section+,
+\verb+\subsection+, \verb+\subsubsection+, \verb+\paragraph+, and
+\verb+\subparagraph+. Depending on the structural complexity of your chapter,
+use the command \verb+\setcounter{secnumdepth}{<depth>}+ to set an appropriate level of numbering.
+
+Excessive numbering reduces the clarity of exposition. Heads should be numbered only as deep
+as it is necessary. Typically, values
+\verb+...{secnumdepth}{3}+ or
+\verb+...{secnumdepth}{2}+ are good choices. The style default is ``\verb+3+''. Do not change it unless you
+have good reasons to do so.
+
+\subsection{Equation, Theorem, Figure, and Table Numbering}% 1.2
+
+As a rule of thumb, each heading you use should fit into one
+of the sectioning categories (numbered or not) or into one of the
+theorem-like environments (theorems, lemmas, propositions, corollaries,
+claims, definitions, remarks, proofs, etc.).
+
+Other than section numbering, two other major groups of counting
+sequences are equations and theorem-like environments (enunciations).
+The way they are numbered is determined by the style.
+If you have a side comment with any of the theorem-like environments' titles, declare it
+in the optional argument
+
+\begin{verbatim}
+\begin{lemma}[Farkas, see \cite{bookwebDynamic}]
+Text of the Farkas lemma.
+\end{lemma}
+\end{verbatim}
+which gives
+
+\begin{lemma}[Farkas, see \cite{bookwebDynamic}]
+Text of the Farkas lemma.
+\end{lemma}
+
+You will notice that some theorem-like environments are set in italic
+and separated from the surrounding text by some space, whereas the
+others are all-roman and have no extra space above and below. The style
+takes care of all such issues. Do not manually space out any of the
+enunciations.
+
+For {\ICS} chapters our style prefers (and enforces) simple numbering of figures and tables.
+Both figures and tables will be numbered as 1, 2,~$\ldots.$ Captions will start with
+\textsc{Figure~1}, \textsc{Figure 2}, \textsc{Table 1}, \textsc{Table 5}, etc.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Figures and Tables}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For handling figures and tables, we provide macros \verb+\FIGURE+
+and \verb+\TABLE+ to capture the content of a floating element (figure or table), its caption, and possible notes.
+Captions should be kept simple, typically as a sentence fragment. Any additional information, including
+table footnotes, should be set as the third argument to
+\verb+\FIGURE+ or and \verb+\TABLE+.
+
+
+\begin{figure}[t]
+\FIGURE
+{A figure spanning the whole width of the text.\label{fig1}}
+{\framebox{\hbox to 388bp{\HD{47}{30}\hss\fs.24.30. A\ \ \ W I D E\ \ \ F I G U R E\hss}}}
+{We use type instead of a real figure to reduce the size of this file.}
+\end{figure}
+
+A typical case is Figure~\ref{fig1}:
+
+{\fs.8.9.\relax
+\begin{verbatim}
+\begin{figure}[t]
+\FIGURE
+{A figure spanning the whole width of the text.\label{fig1}}
+{\framebox{\hbox to 388bp{\HD{47}{30}\hss\fs.24.30. A\ \ \ W I D E\ \ \ F I G U R E\hss}}}
+{We use type instead of a real figure to reduce the size of this file.}
+\end{figure}
+\end{verbatim}}
+
+\noindent Note that \verb+\FIGURE+ has three arguments:
+(1)~caption with label,
+(2)~included graphics that will be automatically centered in the available \verb+\hsize+,
+and
+(3)~optional (foot)note. If you do not need
+the note field just leave it as an empty pair of braces \verb+{}+. For syntax, it must be
+present even in that (empty) case.
+
+For inclusion of graphics, use the \verb+\includegraphics+ syntax from \verb+graphicx+. For example,
+if the figure name is \verb+fracimage1.eps+ and it should span the full width of the text (5.5~in),
+you would include
+\begin{verbatim}
+\includegraphics[width=5.5in]{fracimage1.eps}
+\end{verbatim}
+as the second argument to \verb+\FIGURE+.
+
+
+\begin{figure}[t]
+\begin{minipage}[t]{160bp}
+\FIGURE
+{A small figure.\label{fig2}}
+{\framebox{\hbox to 153bp{\HD{37}{30}\hss\TEN A SMALL FIGURE\hss}}}
+{See \texttt{www.asmallfigure.com}.}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{218bp}
+\FIGURE
+{A not so small figure.\label{fig3}}
+{\framebox{\hbox to 211bp{\HD{37}{30}\hss\TEN A NOT SO SMALL FIGURE\hss}}}
+{A figure note here.}
+\end{minipage}
+\end{figure}
+
+
+Similar macro, \verb+\TABLE+, has three arguments:
+(1)~caption with label,
+(2)~table itself by using the produced by \verb+tabular+ or \verb+tabular*+ environments,
+and
+(3)~optional (foot)note.
+Per style, tables have only three horizontal lines: above
+the table, between table column heads and the table body, and after the
+table body. Vertical rules are discouraged.
+
+If the table is too big, it may be necessary to reduce its type size.
+Such font (and other) adjustments
+should be done within the second argument of \verb+\TABLE+, just before
+\verb+\begin{tabular*}+.
+
+
+\begin{table}[b]
+{\begin{minipage}{2in}
+\TABLE
+{A little caption.\label{tab1}}
+{\begin{tabular*}{2in}{@{}l@{\extracolsep{\fill}}l@{}}
+\hline
+\up State& Capital\down\\
+\hline
+\up Maryland& Annapolis\\
+Virginia& Richmond\\
+Colorado& Denver\down\\
+\hline
+\end{tabular*}}
+{A note?}
+\end{minipage}}%
+\hfill
+{\begin{minipage}{3in} \TABLE {A somewhat longer caption
+just to get into the second line.\label{tab2}}
+{\begin{tabular*}{3in}{@{\extracolsep{\fill}}ll@{\hskip16pt}ll@{}}
+\hline
+\up State& Capital& State& Capital\down\\
+\hline
+\up Maryland& Annapolis& Pennsylvania& Harrisburg\\
+Virginia& Richmond& Georgia &Atlanta\\
+Colorado& Denver& Illinois& Springfield\down\\
+\hline
+\end{tabular*}}
+{}
+\end{minipage}}
+\end{table}
+
+
+
+To make the table better styled regarding vertical spacing around rules,
+use macro \verb+\up+ in one of the entries after the horizontal lines
+and \verb+\down+ in one of the entries before horizontal lines. The small Table~\ref{tab1}
+is coded as
+
+{\fs.8.9.\relax
+\begin{verbatim}
+\TABLE
+{A little caption.\label{tab1}}
+{\begin{tabular*}{2in}{@{}l@{\extracolsep{\fill}}l@{}}
+\hline
+\up State& Capital\down\\ \hline
+\up Maryland& Annapolis\\
+Virginia& Richmond\\
+Colorado& Denver\down\\ \hline
+\end{tabular*}}
+{A note?}
+\end{verbatim}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Math Formulas}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This style preloads \verb+amsmath+ and \verb+amssymb+. That means you
+can use both the classic LaTeX formatting tools for equations as
+\verb+equation+ and \verb+eqnarray+, and the variety of \verb+amsmath+ supplied tools.
+Special letters as script and openface (blackboard bold) should be coded as, for example,
+\verb+\mathcal{R},\mathbb{R}+ to get $\mathcal{R}, \mathbb{R}$. Avoid obsolete and ugly constructions as
+$\textrm{I{\kern-0.17em}R}$ for openface letters.
+
+In the \verb+array+ environment in math, entries are by default set in
+text style (smaller version of sum, product, union, integral, etc. is used,
+limits of summation set as subscripts and superscripts, not below and above, etc.).
+Fractions by default set as \verb+\tfrac+ (small text fractions),
+not as \verb+\dfrac+ (larger display-style fractions).
+Occasionally that looks too cramped.
+To fix the problem, precede those fields by \verb+\DS+ (for \verb+\displaystyle+). To improve vertical
+spacing in such cases, \verb+\mcr+ may be used instead of the usual
+\verb+\\+. Compare
+\begin{equation}\label{eq2}
+\left\lbrace \begin{array}{l@{\quad}l}
+x\sin\frac1x,&x\ne0\\ 0,&x=0\end{array} \right.
+\quad\text{or}\quad
+\left\lbrace \begin{array}{l@{\quad}l}
+\DS x\sin\frac1x,&x\ne0\\ 0,&x=0\end{array} \right.
+\quad\text{with}\quad
+\left\lbrace \begin{array}{l@{\quad}l}
+\DS x\sin\frac1x,&x\ne0\mcr 0,&x=0\end{array} \right.
+\end{equation}
+{\fs.8.9.\relax
+\begin{verbatim}
+\left\lbrace \begin{array}{l@{\quad}l}
+x\sin\frac1x,&x\ne0\\ 0,&x=0\end{array} \right.
+\quad\text{or}\quad
+\left\lbrace \begin{array}{l@{\quad}l}
+\DS x\sin\frac1x,&x\ne0\\ 0,&x=0\end{array} \right.
+\quad\text{with}\quad
+\left\lbrace \begin{array}{l@{\quad}l}
+\DS x\sin\frac1x,&x\ne0\mcr 0,&x=0\end{array} \right.
+\end{verbatim}}
+
+Another typical problem arises when you need a new math
+operator, as for example ``support,'' in $\mathop{\textrm{supp}}(K)$.
+Define it as
+\begin{verbatim}
+\def\supp{\mathop{\textrm{supp}}\nolimits}
+\end{verbatim}
+If your operator needs limits as in
+\begin{equation}\label{eq3}
+2\pi i\,\mathop{\textrm{Res}}_{z=\pi i} f(z),
+\end{equation}
+define it as
+\begin{verbatim}
+\def\Res{\mathop{\textrm{Res}}}
+\end{verbatim}
+so that the above formula will be typed as \verb+2\pi i\Res_{z=\pi i}f(z)+.
+
+%%%%%%%%%%%%%%
+\begin{table}[t]
+\TABLE {All the different types of bibliography entries 
+\label{tabtut}} {\begin{tabular*}{\hsize}{@{}l@{\extracolsep\fill}l@{}} \hline
+\up\down Type of entry&\multicolumn{1}{c}{Comments}\\
+\hline
+\up
+   article  & \parbox[t]{4.39in}{published \cite{articlepublished};
+             to appear \cite{articletoappear}; \\
+             submitted with journal named \cite{articlesubmittedjournalNamed}; \\
+             submitted without journal named \cite{articlesubmittedjournalNotNamed}}\\[25pt]
+%\hline
+   book     & regular \cite{book};
+             web, static \cite{bookwebStatic};
+             web, dynamic \cite{bookwebDynamic} \\[4pt]
+%\hline
+   database & with author \cite{databasewithAuthor} ;
+              without author \cite{databasewithoutAuthor} \\[4pt]
+%\hline
+   in book  & \parbox[t]{4.39in}{Chapter \cite{chapter}
+              \dots book is in series \cite{chapterinseries};
+              in proceedings \cite{inproceedings}}\\[4pt]
+%\hline
+   proceedings & \cite{proceedings} \\[4pt]
+%\hline
+   manual   & with author \cite{manualwithAuthor};
+              without author (also dynamic) \cite{manualwithoutAuthor};
+              primer \cite{primer} \\[4pt]
+%\hline
+   newsletter & \parbox[t]{4.39in}{format same as article;
+                here is one with added note of online availability and
+                double publication \cite{newsletter}} \\[14.5pt]
+%\hline
+   proceedings & \cite{proceedings} \\[4pt]
+%\hline
+   report  & \cite{reportacademic, reportgovt} \\[4pt]
+%\hline
+   thesis  & Ph.D. \cite{thesisPHD}; Master's \cite{thesisMS} \\[4pt]
+%\hline
+   web site & no author \cite{website}; course \cite{websitecourse};
+             item \cite{websiteitem}\down \\
+\hline
+\end{tabular*}}
+{This table and accompanying explanations were provided by Harvey Greenberg \cite{Greenberg04}.}
+\end{table}
+%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example Bibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Table \ref{tabtut} illustrates different kinds of documents you could reference in your
+proceedings paper.  If you use BibTeX, you merely specify plain style (but you must still use
+some of the optional fields and not abbreviate names of journals and proceedings). Otherwise,
+please note the formats.  In particular, all authors begin with their first (and other)
+initials, followed by their last name.
+
+You might see that some entries have a note after the citation, such as
+``Available on\-line~...'' \cite{manualwithAuthor} and
+``This is a course site \dots'' \cite{websitecourse}.  You are free to do an
+annotated bibliography.  If you use BibTeX, the \verb+TutORials.bst+ style file
+supports an \texttt{annote} field.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{APPENDIX}{}%{With a Title}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent If you want an appendix with a title, please fill
+in the title into the empty braces at the end of \verb+\begin{APPENDIX}{}+.
+Appendix sections will be numbered by A, B, C, etc.
+
+\section{My First Appendix Section}
+
+The text goes on. The text goes on. The text goes on. The text goes on. The text goes on. The text goes on.
+The text goes on. The text goes on. The text goes on. The text goes on. The text goes on. The text goes on.
+
+\subsection{First Appendix Subsection}
+
+In this subsection, there will be even a theorem and a lemma.
+Their numbering continues from the main text. The same holds for numbering of equations.
+
+\begin{theorem}
+If this is a theorem in your appendix, for any real numbers $a,b,c$ the equality
+\begin{equation}
+a^3+b^3= (a+b)(a^2-ab+b^2)
+\end{equation}
+holds, regardless of the smaller text size in which this statement is presented.
+\end{theorem}
+
+Here is also a lemma.
+
+\begin{lemma}
+This is an appendix lemma.
+\end{lemma}
+
+\subsubsection{An Example of Appendix Subsubsection.}
+
+Ignore this text. It is just to fill in a paragraph.
+Ignore this text. It is just to fill in a paragraph.
+Ignore this text. It is just to fill in a paragraph.
+Ignore this text. It is just to fill in a paragraph.
+
+\section{Second Appendix Section}
+
+Ignore this text too. It is just to fill in a paragraph.
+Ignore this text too. It is just to fill in a paragraph.
+Ignore this text too. It is just to fill in a paragraph.
+Ignore this text too. It is just to fill in a paragraph.
+
+\subsection{Second Appendix Section's Subsection}
+
+This is the final section shown. After this we finish the appendix
+by issuing the command \verb+\end{APPENDIX}+ and go down to the references.
+
+\end{APPENDIX}
+
+%\section{References}
+
+%%\bibliographystyle{TutORials} % Use this if you need annotations
+\bibliographystyle{plain}
+\bibliography{procbiblio}
+
+%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%
