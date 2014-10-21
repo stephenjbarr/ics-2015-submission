@@ -45,12 +45,23 @@
 
 \ABSTRACT{%
 % put abstract here (required)
-Picasso
+
+Finding an optimal policy in an inventory setting often involves formulating and solving dynamic programs.
+These types of problems are notoriously slow to solve, and tractability concerns limit exploration of the solution space.
+In the computing realm, functional programming (FP) has enjoyed a surge of innovation in recent years, motivated pragmatically by its role in parallel computing and theoretically by a rich category-theoretic underpinning.
+Additionally, FP compilers can implement aggressive optimizations due to the lack of mutable state.
+
+We pose a problem consisting of a manufacturer and multiple retailers, in which one retailer has access to additional information about the manufacturer.
+We formulate this as a finite horizon dynamic program, and implement a solver in Haskell, a leading FP language.
+Our implementation achieves drastic speed increases relative to our reference Matlab implementation.
+This allows us to explore the solution space over a broad range of parameterizations of the model.
+Additionally, we demonstrate a simulated method of moments (SMM) estimation, which matches moments of hypothetical data set with moments resulting from a simulated optimal policy.
+Our approach is applicable to a broad range of finite-horizon dynamic programs.
 
 } % This ends the abstract
 
 \KEYWORDS{%
-functional programming; inventory; 
+functional programming; inventory; dynamic programming;
 } % This ends the keywords
 
 %%%%%%%%%%%
