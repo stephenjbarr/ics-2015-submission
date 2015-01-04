@@ -1,5 +1,18 @@
 \documentclass{tikzposter} % See Section 3
-\title{A Functional Programming Approach to Dynamic Programming Problems in Inventory Management} \institute{Foster School of Business, University of Washington } % See Section 4.1
+
+
+\makeatletter
+\def\title#1{\gdef\@title{\scalebox{\TP@titletextscale}{%
+\begin{minipage}[t]{\linewidth}
+\centering
+#1
+\par
+\vspace{0.5em}
+\end{minipage}%
+}}}
+\makeatother
+
+\title{A Functional Programming Approach to \\ Dynamic Programming Problems in Inventory Management} \institute{Foster School of Business, University of Washington } % See Section 4.1
 \author{Stephen J. Barr} % \titlegraphic{Logo}
 \usetheme{Simple} % See Section 5
 \begin{document}
@@ -7,7 +20,17 @@
 
 \begin{columns}
 \column{0.5}
-\block{The Inventory DP}{Blocktext} % See Section 4.2
+\block{Canonical Inventory Finite Horizon Dynamic Program}{
+  \begin{itemize}
+  \item $K$ period solution horizon
+  \item Find optimal stock levels for retailer 
+  \item Solve using backwards induction
+  \end{itemize}
+
+
+  
+
+} % See Section 4.2
 
 \column{0.5}
 \block{Why Functional Programming?}{Haskell}
