@@ -1,5 +1,16 @@
 \documentclass{tikzposter} % See Section 3
 
+\usepackage{listings,relsize}
+
+\usepackage{natbib}
+\usepackage{minted}
+\usepackage{boiboites}
+
+\usepackage{tcolorbox}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+
 
 \makeatletter
 \def\title#1{\gdef\@title{\scalebox{\TP@titletextscale}{%
@@ -14,21 +25,30 @@
 
 \title{A Functional Programming Approach to \\ Dynamic Programming Problems in Inventory Management} \institute{Foster School of Business, University of Washington } % See Section 4.1
 \author{Stephen J. Barr} % \titlegraphic{Logo}
-\usetheme{Simple} % See Section 5
+\usetheme{Autumn} % See Section 5
 \begin{document}
 \maketitle % See Section 4.1
 
 \begin{columns}
 \column{0.5}
-\block{Canonical Inventory Finite Horizon Dynamic Program}{
+\block{Finite Horizon Dynamic Program}{
   \begin{itemize}
-  \item $K$ period solution horizon
-  \item Find optimal stock levels for retailer 
+  \item $N$ period solution horizon
+  \item \textbf{Objective: (Inventory)} Find optimal stock levels for retailer 
   \item Solve using backwards induction
   \end{itemize}
 
-
-  
+  Notation:
+  \begin{equation}
+    \label{eq:dp-recursion}
+    x_{k+1} = f_{k}(x_{k}, u_{k}, w_{k}), k \in [0,...,N-1]
+  \end{equation}
+  where
+  \begin{itemize}
+  \item $x_{k}$ system state
+  \item $u_{k}$ control variable
+  \item $w_{k}$ random disturbance
+  \end{itemize}
 
 } % See Section 4.2
 
@@ -38,9 +58,27 @@
 
 \begin{columns} % See Section 4.4
 \column{0.3} % See Section 4.4
-\block{BlocktitleB}{Blocktext}
-\column{0.7}
-\block{BlocktitleC}{Blocktext}
-\note{Notetext} % See Section 4.3
+\block{Imperative Pseudo-Code}{
+
+\inputminted{c}{calg.c}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item Easily recognizable
+\item Familiar
+\item Seems to clearly translate Eq. \ref{eq:dp-recursion}
+\end{itemize}
+
+}
+
+\column{0.3}
+\block{Notes About Imperative}{
+  \begin{itemize}
+  \item Solution at each iteration is a matrix $\mathbf{Y}^{t}$.
+  \item Full solution is the set of matrices $[\mathbf{Y}^{1},...,\mathbf{Y}^{K}]$
+  \item Every element $\mathbf{Y}^{k}_{i,j} = f(Y^{k+1}; \Theta)$.
+  \end{itemize}
+}
+% \note{Notetext} % See Section 4.3
 \end{columns}
 \end{document}
