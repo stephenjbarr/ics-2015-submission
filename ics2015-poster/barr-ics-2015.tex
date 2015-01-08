@@ -3,9 +3,10 @@
 \usepackage{listings,relsize}
 
 \usepackage{natbib}
+\usepackage{bibentry}
 \usepackage{minted}
 \usepackage{boiboites}
-
+\usepackage{amsmath}
 \usepackage{tcolorbox}
 \usepackage{etoolbox}
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
@@ -69,16 +70,136 @@
 \item Seems to clearly translate Eq. \ref{eq:dp-recursion}
 \end{itemize}
 
-}
 
-\column{0.3}
-\block{Notes About Imperative}{
-  \begin{itemize}
+\textbf{Notes:}
+\begin{itemize}
   \item Solution at each iteration is a matrix $\mathbf{Y}^{t}$.
   \item Full solution is the set of matrices $[\mathbf{Y}^{1},...,\mathbf{Y}^{K}]$
   \item Every element $\mathbf{Y}^{k}_{i,j} = f(Y^{k+1}; \Theta)$.
   \end{itemize}
+
+
 }
-% \note{Notetext} % See Section 4.3
+
+% \column{0.3}
+% \block{Notes About Imperative}{
+% \textbf{Imperative Notes:}
+%   \begin{itemize}
+%   \item Solution at each iteration is a matrix $\mathbf{Y}^{t}$.
+%   \item Full solution is the set of matrices $[\mathbf{Y}^{1},...,\mathbf{Y}^{K}]$
+%   \item Every element $\mathbf{Y}^{k}_{i,j} = f(Y^{k+1}; \Theta)$.
+%   \end{itemize}
+
+% }
+
+\column{0.7}
+\block{How this often gets implemented}{
+  Mathworks\textregistered Matlab / GNU Octave Style
+  \inputminted{octave}{matlabcode1.m}
+
+  \textbf{Observation:} This style imposes far more structure on the problem than what is often intended and needed to solve the problem. This structure is often very limiting.
+}
+
 \end{columns}
+
+
+\begin{columns}
+  \column{0.5}
+  \block{Implicit Limitations of Imperative Approach}{
+    \begin{enumerate}
+    \item The nested for loops suggest an ordering. 
+      For a given period $k$, calculations are performed in the order $[(1,1),(1,2),...,(1,i_{max}),(2,1)...]$. This is \textbf{overspecifying} the solution, and thus limiting the compiler's ability to optimize.
+    \end{enumerate}
+  }
+  \column{0.5}
+  \block{Functional Equivalent}{ 
+    \begin{enumerate}
+    \item Create a set over indices $\mathcal{I}$ and map over this set. This specifies what we want to happen, without limiting the compiler to an exection strategy.
+    \end{enumerate}
+  }
+
+
+\end{columns}
+
+\begin{columns}
+  \column{0.4}
+  \block{map in Haskell}{
+    \inputminted{haskell}{simplemap.hs}
+  
+    \begin{itemize}
+    \item Imposes exactly the amount of required structure.
+    \item Compiler is free to optimize the execution including, (CPU parallelism [1], usage of GPU [2], or both [3])
+    \item With minimal effort, you can run on a cluster [4].
+    \end{itemize}
+
+  }
+
+\column{0.6}
+\block{Scan}{
+  The backward induction loop is equivalent to a scan. 
+  \inputminted{haskell}{scanl.hs}
+}
+
+
+
+\end{columns}
+
+% \note{Notetext} % See Section 4.3
+
+\begin{columns}
+  \column{0.33}
+  \block{Notation}{
+
+    Solution vector 
+    \begin{align*}
+      &\equiv [\mathbf{Y}_{N}, \mathbf{Y}_{N-1}, ..., \mathbf{Y}_{1}] \\
+      % &= [g(\mathbf{0}, N), g(g(\mathbf{0}, N-1)), ..., g(...(g(\mathbf{0},1))...)]
+      &= [g(-, N), g(g(-, N-1)), ..., g(...(g(-,1))...)] \\
+      &= g^{\circ k}(-;\Theta) ~ k \in \{N,N-1,...1\}
+    \end{align*}
+    % where
+    % \begin{equation*}
+    %   g(\mathbf{X}, k) =
+    %   \begin{cases}
+    %     f'(\Theta)  & k = N \\
+    %     f(\mathbf{X}, k; \Theta) & k \in [N-1] 
+    %   \end{cases}
+    % \end{equation*}
+
+    % \begin{itemize}
+    % \item     $g(k ) = 
+    %   \begin{cases}
+    %     f'(\Theta) &k = N \\
+    %     f^{\circ k}(\Theta) &k \in \{N-1,...,1\}
+    %   \item  $[\mathbf{Y}_{N}, \mathbf{Y}_{N-1}, ..., \mathbf{Y}_{1}]$
+    %   \item $ \equiv [f'(\Theta), f(f'(\Theta)), f(f(f'(\Theta))), ..., f^{\circ N}(x)]$.
+    %   \end{itemize}
+
+  }
+
+
+  \column{0.34}
+  \block{SMM}{
+
+  }
+
+  \column{0.33}
+  \block{Useful packages}{
+    \begin{itemize}
+    \item [1] Par monad - \citet*{marlow_monad_2011}  
+    \item [2] Accelerate - \citet*{mcdonell_optimizing_2014}
+    \item [3] Meta Par - \citet*{foltzer_meta-scheduler_2012}
+    \item [4] Cloud Haskell -  \citet*{epstein_towards_2011}
+    \item [5] LLVM backend - \citet*{terei_llvm_2010}
+    \end{itemize}
+  }
+
+
+\end{columns}
+
+  
+\nobibliography{/home/stevejb/Dropbox/bibliography/sjbmainbibtex}
+\bibliographystyle{plainnat}
+
+
 \end{document}
