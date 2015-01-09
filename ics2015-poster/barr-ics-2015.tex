@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{tcolorbox}
 \usepackage{etoolbox}
+\usepackage{booktabs}
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
 
@@ -97,7 +98,7 @@
   Mathworks\textregistered Matlab / GNU Octave Style
   \inputminted{octave}{matlabcode1.m}
 
-  \textbf{Observation:} This style imposes far more structure on the problem than what is often intended and needed to solve the problem. This structure is often very limiting.
+  \textbf{Observation:} This style imposes far more structure on the problem than what is often intended and needed to solve the problem.
 }
 
 \end{columns}
@@ -137,7 +138,26 @@
 \column{0.6}
 \block{Scan}{
   The backward induction loop is equivalent to a scan. 
-  \inputminted{haskell}{scanl.hs}
+
+      \inputminted{haskell}{scanl.hs}              
+  
+  % In the type signature, the function \mintinline{haskell}{f} has type  \mintinline{haskell}{a -> b -> a}. Let type \mintinline{haskell}{a} be a matrix type, and \mintinline{haskell}{b} be an integer type. The, function \mintinline{haskell}{f} given to \mintinline{haskell}{scanl}, for this application, takes a matrix, and integer, and returns a matrix.
+
+  \vspace{1.0cm}
+
+  \begin{center}
+    \begin{tabular}{ l | l | l }
+      \toprule 
+      Expression & Our Application & Math \\
+      \hline
+      \mintinline{haskell}{f :: a -> b -> a} & f :: Matrix -> Int -> Matrix   & $ \mathbf{Y}_{k} = f(\mathbf{Y}_{k+1}, k+1)  $  \\
+      \mintinline{haskell}{z :: a} & z :: Matrix & Null initial matrix \\
+      \mintinline{haskell}{[x] :: b} & b :: [Int] & $[N,N-1,...,1]$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+
 }
 
 

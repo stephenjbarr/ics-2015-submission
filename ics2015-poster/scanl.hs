@@ -1,2 +1,2 @@
 scanl :: (a -> b -> a) -> a -> [b] -> [a]
-scanl f z [x1, x2, ...]  == [z, z `f` x1, (z `f` x1) `f` x2, ...]
+scanl f z x  == [z,  f z (x !! 0),  f (f z (x!!0)) (x!!1), ...]
