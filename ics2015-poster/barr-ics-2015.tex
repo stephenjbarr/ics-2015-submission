@@ -67,18 +67,18 @@
     \subcolumn{0.5}\block{Why Functional Programming?}{
       \vspace{-1cm}
       \begin{itemize}
-      \item Allows aggresive compiler optimizations [5], [6], [7]
-      \item Provides a more natural mapping between math function $f(x)$ and code function \mintinline{haskell}{f x}
+      \item Allows aggressive compiler optimizations [5], [6], [7].
+      \item Provides a more natural mapping between math function $f(x)$ and code function \mintinline{haskell}{f x}.
       \item As CPU parallelism becomes more prevalent, FP provides a useful toolkit for working in this approach. 
       \end{itemize}
     }
     
     \subcolumn{0.5}\block{Why Haskell?}{
       \begin{itemize}
-      \item Purely functional - forces you to use FP paradigm without an \textit{imperative escape valve}.
+      \item Purely functional - forces usage of FP paradigm without an \textit{imperative escape valve}.
       \item Mature - Started in 1990 as an effort to consolidate FP research.
       \item Built-in support for concurrency and parallelism.
-      \item Robust libraries (e.g. numerical integration [8], machine learning [9])
+      \item Robust libraries (e.g. numerical integration [8], machine learning [9]).
       \end{itemize}
     }
   \end{subcolumns}
@@ -103,7 +103,7 @@
 \textbf{Notes:}
 \begin{itemize}
   \item Solution at each iteration is a matrix $\mathbf{Y}^{t}$.
-  \item Full solution is the set of matrices $[\mathbf{Y}^{1},...,\mathbf{Y}^{K}]$
+  \item Full solution is the set of matrices $[\mathbf{Y}^{1},...,\mathbf{Y}^{K}]$.
   \item Every element $\mathbf{Y}^{k}_{i,j} = f(Y^{k+1}; \Theta)$.
   \end{itemize}
 
@@ -137,13 +137,13 @@
   \block{Implicit Limitations of Imperative Approach}{
     % \begin{enumerate} \item 
 The nested for loops suggest an ordering. 
-      For a given period $k$, calculations are performed in the order $[(1,1),(1,2),...,(1,i_{max}),(2,1)...]$. This is \textbf{overspecifying} the solution, and thus limiting the compiler's ability to optimize.
+      For a given period $k$, calculations are performed in the order $[(1,1),(1,2),...,(1,i_{max}),(2,1)...]$. This is \textbf{over-specifying} the solution, and thus limiting the compiler's ability to optimize.
     % \end{enumerate}
   }
   \column{0.5}
   \block{Functional Equivalent}{ 
     % \begin{enumerate}    \item 
-Create a set over indices $\mathcal{I}$ and map over this set. This specifies what we want to happen, without limiting the compiler to an exection strategy.
+Create a set over indices $\mathcal{I}$ and map over this set. This specifies the computation to happen, without limiting the compiler to an execution strategy.
     % \end{enumerate}
   }
 
@@ -152,21 +152,22 @@ Create a set over indices $\mathcal{I}$ and map over this set. This specifies wh
 
 \begin{columns}
   \column{0.4}
+  \vspace{-1.0cm}
   \block{map in Haskell}{
     \inputminted{haskell}{simplemap.hs}
   
     \begin{itemize}
+    % \item Uses list comprehension to generate index set.
     \item Imposes exactly the amount of required structure.
     \item Compiler is free to optimize the execution strategy (CPU parallelism [1], usage of GPU [2], or both [3], run on cluster [4])
-    \item Common Subexpression Elimination, Inlining, usage of LLVM for high quality machine code generation
+    \item Common Sub-expression Elimination, Inlining, usage of LLVM for high quality machine code generation, etc.
     % \item Research in-progress to simply enable the serialization of closures, for running on a cluster [4].
     \end{itemize}
 
   }
 
 \column{0.6}
-\block{Scan}{
-  The backward induction loop is equivalent to a scan. 
+\block{Scan for Backwards Induction Loop}{
 
       \inputminted{haskell}{scanl.hs}              
   
