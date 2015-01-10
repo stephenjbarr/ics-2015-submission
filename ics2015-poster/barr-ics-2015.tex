@@ -10,6 +10,10 @@
 \usepackage{tcolorbox}
 \usepackage{etoolbox}
 \usepackage{booktabs}
+
+
+
+
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
 
@@ -40,22 +44,37 @@
   \item Solve using backwards induction
   \end{itemize}
 
-  Notation:
+  
   \begin{equation}
     \label{eq:dp-recursion}
     x_{k+1} = f_{k}(x_{k}, u_{k}, w_{k}), k \in [0,...,N-1]
   \end{equation}
   where
   \begin{itemize}
-  \item $x_{k}$ system state
-  \item $u_{k}$ control variable
-  \item $w_{k}$ random disturbance
+  \item $x_{k}$ system state,
+  \item $u_{k}$ control variable,
+  \item $w_{k}$ random disturbance.
   \end{itemize}
 
 } % See Section 4.2
 
+% \column{0.5}
+% \block{Why Functional Programming?}{  
+% }
+
 \column{0.5}
-\block{Why Functional Programming?}{Haskell}
+  \begin{subcolumns}
+    \subcolumn{0.5}\block{Why Functional Programming?}{
+      \begin{itemize}
+      \item Allows aggresive compiler optimizations [5], [6], [7]
+      \item Provides a more natural mapping between math function $f(x)$ and code function \mintinline{haskell}{f x}
+      \item As CPU parallelism becomes more prevalent, FP provides a useful toolkit for working in this approach. 
+      \end{itemize}
+    }
+    \subcolumn{0.5}\block{Why Haskell?}{123}
+  \end{subcolumns}
+
+
 \end{columns}
 
 \begin{columns} % See Section 4.4
@@ -98,7 +117,7 @@
   Mathworks\textregistered Matlab / GNU Octave Style
   \inputminted{octave}{matlabcode1.m}
 
-  \textbf{Observation:} This style imposes far more structure on the problem than what is often intended and needed to solve the problem.
+  \textbf{Observations:} (1) This style imposes far more structure on the problem than what is often intended and needed to solve the problem. (2) Lack of types introduces error possibilities.
 }
 
 \end{columns}
@@ -168,7 +187,7 @@
 
 \begin{columns}
   \column{0.33}
-  \block{Notation}{
+  \block{Filler}{
 
     Solution vector 
     \begin{align*}
@@ -199,18 +218,32 @@
 
 
   \column{0.34}
-  \block{SMM}{
-
+  \block{Simulated Method of Moments}{
+    \vspace{-1.0cm}
+    \textit{Why we need these DPs to solve quickly.} \\
+    \vspace{0.5cm}
+    \textbf{Main Idea:}
+    \begin{itemize}
+    \item For a parameterization $\Theta_{j}$, we want to (1) solve the DP and get policy function $f_{j}^{*}$ (2) simulate an inventory system operating under $f_{j}^{*}$, and (3) take moments of simulated parameters of interest $M(\Theta_{j})$.
+    \item For real data, take the same set of moments $M^{*}$.
+    \item Use numerical minimization, such as simulated annealing, to minimize over $\Theta$ objective $D(M(\Theta, M^{*})$.
+    \end{itemize}
+    
+    Solving the DP is inside the inner loop of a numerical search, so this must be fast.
+    Also, care must be taken to pick moments which identify the system.
+    See: \citet*{mcfadden_method_1989}, \citet*{gourieroux_simulation-based_1997}.
   }
 
   \column{0.33}
-  \block{Useful packages}{
+  \block{FP / Haskell References}{
     \begin{itemize}
     \item [1] Par monad - \citet*{marlow_monad_2011}  
     \item [2] Accelerate - \citet*{mcdonell_optimizing_2014}
     \item [3] Meta Par - \citet*{foltzer_meta-scheduler_2012}
     \item [4] Cloud Haskell -  \citet*{epstein_towards_2011}
     \item [5] LLVM backend - \citet*{terei_llvm_2010}
+    \item [6] Inlining - \citet*{peyton_jones_secrets_2002}
+    \item [7] Nested Data Parallelism - \citet*{peyton_jones_harnessing_2008}   
     \end{itemize}
   }
 
